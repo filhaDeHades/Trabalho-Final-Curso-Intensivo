@@ -20,19 +20,19 @@ O curso intensivo "Fluência em Python - do básico ao avançado" foi idealizado
 O curso tem duração de 10hrs e foi criado para atender a ementa das matérias de "Programação de Computadores" e "Programação de Computadores I", ele também conta com um certificado de participação e apostila.
 
 ## Descrição do menu do código-exemplo:
-1. _Tabela de produtos:_ Mostra todos os produtos do arquivo, seu preço e sua quantidade em estoque.
-2. _Compras:_ Recebe os produtos a ser comprados e a quantidade deseja, retira a quantidade do arquivo e adiciona os produtos a nota fiz que deve indicar os produtos, seus preços e suas quantidades.
-3. _Ganhos Diários:_ Mostra o total de tudo que foi comprado durante uma execução do programa.
-4. _Adiciona Produtos:_ Adiciona um produto, seu preço e sua quantidade em estoque para o arquivo.
-5. _Mostrar Menu_: Mostra novamente o menu de ações possíveis.
-6. _Sair:_ Termina a execução do programa.
+1.*Tabela de produtos:* Mostra todos os produtos do arquivo, seu preço e sua quantidade em estoque.
+2. *Compras:* Recebe os produtos a ser comprados e a quantidade deseja, retira a quantidade do arquivo e adiciona os produtos a nota fiz que deve indicar os produtos, seus preços e suas quantidades.
+3. *Ganhos Diários:* Mostra o total de tudo que foi comprado durante uma execução do programa.
+4. *Adiciona Produtos:* Adiciona um produto, seu preço e sua quantidade em estoque para o arquivo.
+5. *Mostrar Menu:* Mostra novamente o menu de ações possíveis.
+6. *Sair:* Termina a execução do programa.
 
 ## Descrição das funções do código-exemplo:
-1. _menu(l):_ Recebe uma lista com o nome das opções de menu e as escreve de forma formatada no terminal.
-2. _tabela():_ Cria uma tabela apartir dos dados do arquivo.
-3. _notaFiscal(matriz):_ Recebe uma matriz com os produtos comprados, seus preços e a quantidade comprada e cria uma nota fiscal formatada com eles, adicionando o valor total da compra.
-4. _atualizaTabela(matriz):_ Recebe uma matriz com os produtos atualizados, seus preços e sua quantidade em estoque e os coloca na tabela.
-5. _compra():_ Faz as operações de compra de produtos e atualização do estoque.
-6. _ganhosDia():_ Escreve no terminal os ganhos do dia em reais e a quantidade de produtos vendidos.
-7. _addi()_: Adiciona produtos ao estoque.
-8. _main():_ Mostra o menu e acha as outras funções.
+1. *menu(l):* Recebe uma lista com o nome das opções de menu e as escreve de forma formatada no terminal.
+2. *tabela():* Cria uma tabela apartir dos dados do arquivo.
+3. *notaFiscal(matriz):* Recebe uma matriz com os produtos comprados, seus preços e a quantidade comprada e cria uma nota fiscal formatada com eles, adicionando o valor total da compra.
+4. *atualizaTabela(matriz):* Recebe uma matriz com os produtos atualizados, seus preços e sua quantidade em estoque e os coloca na tabela.
+5. *compra():* Faz as operações de compra de produtos e atualização do estoque.
+6. *ganhosDia():* Escreve no terminal os ganhos do dia em reais e a quantidade de produtos vendidos.
+7. *addi():* Adiciona produtos ao estoque.
+8. *main():* Mostra o menu e acha as outras funções.
