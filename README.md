@@ -17,5 +17,5 @@ O arquivo inicial terá o produto, seu preço e sua quantidade em estoque.
 
 ##Detalhes do curso
 O curso intensivo "Fluência em Python - do básico ao avançado" foi idealizado por [Tamires da Hora dos Santos](https://www.linkedin.com/in/tamires-da-hora-dos-santos-851a96170/ "Perfil do Linkedin") e [Marcos Augusto do Amaral](https://www.linkedin.com/in/marcos-augusto-amaral/ "Perfil do Linkedin") como parte da Semana de Cursos da Equipe [AsimUFF](https://www.facebook.com/Asimuff/ "Página do Facebook").  
-O curso tem duração de 10hrs com certificado de participação e apostila.
+O curso tem duração de 10hrs e foi criado para atender a ementa das matérias de "Programação de Computadores" e "Programação de Computadores I", ele também conta com um certificado de participação e apostila.
 

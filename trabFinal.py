@@ -127,16 +127,16 @@ def compra():
 				comp = True
 			else:
 				comp = False
-	print(f'\nO valor total da compra é R${preco.2f}')
+	print(f'\nO valor total da compra é R${preco:.2f}')
 
 #def ganhos():
 
 def addi():
-	x = open('tabela.txt', 'a') #Abrir para escrever no final
-	print('\033[033m\nDigite o produto que você quer adicionar, seu preço em decimal e sua quantidade em estoque:')
+	x = open('tabela.txt', 'r') #Abrir para escrever no final
+	print('\033[033m\nDigite o produto que você quer adicionar, seu preço com 2 casas decimais e sua quantidade em estoque:')
 	print("Caso o nome do produto tenha mais de uma palavra, substitua os espaços por '-'\n")
 	novo = input('Digite o produto: \033[m')
-
+	novo = novo + "\n"
 	y = novo.split()
 	if len(y) != 3: #verifica se foram informadas as 3 informações necessárias
 		print('\033[031m\nVocê digitou algo errado, não é possível adicionar essas informações\033[m')
@@ -145,8 +145,21 @@ def addi():
 		print('\033[031m\nVocê digitou algo errado, não é possível adicionar essas informações\033[m')
 		return
 	else:
-		x.write('\n')
-		x.write(novo)
+		r = list()
+		flag = 0
+		for line in x:
+			w = line.split()
+			if w[0].upper() == y[0].upper():
+				flag = 1
+				line = line.replace(str(w[1]), str(y[1]))
+				line = line.replace(str(w[2]), str(y[2]))
+			r.append(line)
+		if flag == 0:
+			r.append(novo)
+		x.close()
+		x = open('tabela.txt', 'w')
+		for i in r:
+			x.write(i)
 	x.close()
 
 def main():
@@ -157,7 +170,7 @@ def main():
 	v = True
 	while v == True:
 		n = input('\033[033m\nO que você quer fazer agora? \033[m')
-		if n.isdigit():
+		if n.isdigit(): #O usuário digitou o número
 			m=int(n)
 			if m >= 1 and m<=6:
 				if m==1:
@@ -175,18 +188,18 @@ def main():
 			else:
 				print('A opção digitada não é válida.')
 				continue
-		else:
-			if n[0] == 'T' or n[0] == 't':
+		else: #caso o usuário escreva
+			if n[0] in 'Tt':
 				tabela()
-			elif n[0] == 'C' or n[0] == 'c':
+			elif n[0] in 'Cc':
 				compra()
-			elif n[0] == 'G' or n[0] == 'g':
+			elif n[0] in 'Gg':
 				ganhos()
-			elif n[0] == 'A' or n[0] == 'a':
+			elif n[0] in 'Aa':
 				addi()
-			elif n[0] == 'M' or n[0] == 'm':
+			elif n[0] in 'Mm':
 				menu(lista)
-			elif n[0] == 'S' or n[0] == 's':
+			elif n[0] in 'Ss':
 				exit(1)
 			else:
 				print('A opção digitada não é válida.')
