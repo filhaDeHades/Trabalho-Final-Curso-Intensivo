@@ -1,37 +1,10 @@
+estoque = 0
+ganhos = 0.0
+
 def menu(l):
 	print('\033[033m\nEsse é o menu:\n\033[m')
 	for i in range(len(l)):
 		print(f'\033[033m{i+1}. \033[m{l[i]}')
-
-def tira(r):
-	x = open('tabela.txt', 'r') #Abre para leitura
-	linhas = x.readlines()
-
-	prod = []
-	for l in linhas: #Descobre os produtos no arquivo
-		prod.append(l.split())
-	x.close()
-
-	r = r.upper()
-	for i in range(len(prod)):
-		aux = prod[i][0].upper()
-		if r == aux:
-			del(prod[i]) #exclui o produto
-			break
-	
-	x = open('tabela.txt', 'w') #apagar o arquivo
-	x.close()
-
-	x = open('tabela.txt', 'a') #escreve os produtos de novo sem o excluido
-	for i in range(len(prod)):
-		for j in range(3):
-			if j == 2:
-				x.write(prod[i][j])
-				x.write('\n')
-			else:
-				x.write(prod[i][j])
-				x.write(' ')
-	x.close()
 
 def tabela():
 	x = open("tabela.txt", 'r') #Abertura do arquivo
@@ -60,7 +33,12 @@ def tabela():
 
 	x.close()
 
-def notaFiscal(matriz, valor):
+def notaFiscal(matriz):
+	global estoque
+	global ganhos
+	valor = 0.0
+	quanto = 0
+
 	print()
 	print("-"*44)
 	print('|{:^42}|'.format('NOTA FISCAL'))
@@ -70,6 +48,10 @@ def notaFiscal(matriz, valor):
 
 	for i in matriz:
 		print(f'|{i[0]:<20}{i[2]:^13}{float(i[1]):^9,.2f}|')
+		valor += float(i[1])*int(i[2])
+		quanto += int(i[2])
+	estoque += quanto
+	ganhos += valor
 	print("-"*44)
 	print('|{:<33}{:^9,.2f}|'.format('TOTAL', valor))
 	print("-"*44)
@@ -81,15 +63,16 @@ def atualizaTabela(matriz):
 	for i in range(len(matriz)):
 		for j in range(3):
 			x.write(matriz[i][j])
-			if j == 2 and i != (len(matriz)-1):
+			if j == 2:
 				x.write('\n')
-			elif i != (len(matriz)-1):
+			else:
 				x.write(' ')
 	x.close()
 
 def compra():
 	totComp = 0
 	comp = True
+	nota = [] #nota fiscal da compra
 
 	x = open('tabela.txt', 'r') #Abre para leitura
 	linhas = x.readlines()
@@ -98,48 +81,44 @@ def compra():
 	for l in linhas: #Descobre os produtos no arquivo
 		prod.append(l.split())
 	x.close()
-
-	preco = 0.0 #preço total da compra
-	nota = [] #nota fiscal da compra
 	
 	while comp == True:
 		x = []
 		x = input('Digite o produto q você deseja comprar e a quantidade: ').upper().split()
 
-		if len(x) != 2:
-			print('A informação passada não é válida, tente novamente.')
-			continue
-		elif x[0].isdigit() == True or x[1].isdigit() == False:
+		if len(x) != 2 or x[0].isdigit() == True or x[1].isdigit() == False:
 			print('A informação passada não é válida, tente novamente.')
 			continue
 		else:
 			i = 0
 			for i in range(len(prod)): #Verifica se existe o produto no estoque
-				if x[0] != prod[i][0].upper() and i+1 == len(prod):
+				if i+1 == len(prod) and  x[0] != prod[i][0].upper():
 					i = len(prod)
 					break
 				elif x[0] == prod[i][0].upper():
 					break
 			print(f'i = {i}')
+			print(f'len = {len(prod)}')
 			if i != len(prod): #Encontrou o produto na lista
-				for i in range(len(prod)):
-					if x[0] == prod[i][0].upper():
-						z = int(prod[i][2])
+				for i in prod:
+					if x[0] == i[0].upper():
+						z = int(i[2])
 						w = z - int(x[1])
-						fiscal = [x[0], prod[i][1]]
+						fiscal = [x[0], i[1]]
 						if w <= 0: #Deleta se w <= 0
 							if w < 0:
 								w = z + (x[1] - z)
-								preco += float(prod[i][1])*w #Add ao valor total
 								fiscal.append(str(w))
 							else:
-								preco += float(prod[i][1])*int(x[1]) #Add ao valor total
-								prod[i][2] = str(w)
-								fiscal.append(x[1])				
-							del(prod[i])
+								i[2] = str(w)
+								fiscal.append(x[1])
+							for j in range(len(prod)):
+								if prod[j][0] == i[0]:
+									print('entrou')
+									del(prod[j])
+									break
 						else:
-							preco += float(prod[i][1])*int(x[1]) #Add ao valor total
-							prod[i][2] = str(w)
+							i[2] = str(w)
 							fiscal.append(x[1])
 				nota.append(fiscal[:]) #add o produto a nota fiscal que será gerada
 			else:
@@ -151,9 +130,10 @@ def compra():
 				comp = True
 			else:
 				comp = False
-	notaFiscal(nota, preco)
+	notaFiscal(nota)
 
-#def ganhos():
+def ganhosDia():
+	print(f"\n\n\033[032mHoje você obteve R${ganhos:.2f} de lucro e vendeu {estoque} produtos até agora.\033[m\n")
 
 def addi():
 	x = open('tabela.txt', 'r') #Abrir para escrever no final
@@ -182,12 +162,15 @@ def addi():
 			r.append(novo)
 		x.close()
 		x = open('tabela.txt', 'w')
+
+		u = []
 		for i in r:
-			x.write(i)
+			u.append(i.split())
+		atualizaTabela(u)
 	x.close()
 
 def main():
-	lista = ('Tabela de Produtos', 'Cálculo da compra', 'Ganhos Diários', 'Adicionar Produtos', 'Mostrar Menu', 'Sair')
+	lista = ('Tabela de Produtos', 'Compras', 'Ganhos Diários', 'Adicionar Produtos', 'Mostrar Menu', 'Sair')
 	
 	menu(lista)
 
@@ -202,7 +185,7 @@ def main():
 				elif m==2:
 					compra()
 				elif m==3:
-					ganhos()
+					ganhosDia()
 				elif m==4:
 					addi()
 				elif m == 5:
@@ -218,7 +201,7 @@ def main():
 			elif n[0] in 'Cc':
 				compra()
 			elif n[0] in 'Gg':
-				ganhos()
+				ganhosDia()
 			elif n[0] in 'Aa':
 				addi()
 			elif n[0] in 'Mm':
@@ -228,7 +211,5 @@ def main():
 			else:
 				print('A opção digitada não é válida.')
 				continue
-
-#tira('Margarina')
 
 main()
