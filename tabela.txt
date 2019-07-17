@@ -1,0 +1,13 @@
+Macarrão 3.5 20
+Arroz 5.0 22
+Feijão-5kg 19.69 12
+Óleo 5.47 54
+Margarina 4.21 37
+Leite 3.99 64
+Molho-de-Tomate 3.49 53
+Pão-de-Forma 5.36 26
+Cerveja 2.39 114
+Maçã-1kg 2.99 46
+Pêra-1kg 3.49 53
+Ruffles 4.5 35
+Chá 6.00 90
