@@ -60,6 +60,33 @@ def tabela():
 
 	x.close()
 
+def notaFiscal(matriz, valor):
+	print()
+	print("-"*44)
+	print('|{:^42}|'.format('NOTA FISCAL'))
+	print("-"*44)
+	print('|{:<20}{:^13}{:^9}|'.format('Produto', 'Quantidade', 'Preço'))
+	print('|{:^42}|'.format('-'*38))
+
+	for i in matriz:
+		print(f'|{i[0]:<20}{i[2]:^13}{float(i[1]):^9,.2f}|')
+	print("-"*44)
+	print('|{:<33}{:^9,.2f}|'.format('TOTAL', valor))
+	print("-"*44)
+	print()
+
+def atualizaTabela(matriz):
+	x = open('tabela.txt', 'w')
+
+	for i in range(len(matriz)):
+		for j in range(3):
+			x.write(matriz[i][j])
+			if j == 2 and i != (len(matriz)-1):
+				x.write('\n')
+			elif i != (len(matriz)-1):
+				x.write(' ')
+	x.close()
+
 def compra():
 	totComp = 0
 	comp = True
@@ -72,10 +99,12 @@ def compra():
 		prod.append(l.split())
 	x.close()
 
+	preco = 0.0 #preço total da compra
+	nota = [] #nota fiscal da compra
+	
 	while comp == True:
-		preco = 0.0
 		x = []
-		x = input('Digite o produto q você quer e a quantidade: ').upper().split()
+		x = input('Digite o produto q você deseja comprar e a quantidade: ').upper().split()
 
 		if len(x) != 2:
 			print('A informação passada não é válida, tente novamente.')
@@ -97,37 +126,32 @@ def compra():
 					if x[0] == prod[i][0].upper():
 						z = int(prod[i][2])
 						w = z - int(x[1])
+						fiscal = [x[0], prod[i][1]]
 						if w <= 0: #Deleta se w <= 0
 							if w < 0:
 								w = z + (x[1] - z)
 								preco += float(prod[i][1])*w #Add ao valor total
+								fiscal.append(str(w))
+							else:
+								preco += float(prod[i][1])*int(x[1]) #Add ao valor total
+								prod[i][2] = str(w)
+								fiscal.append(x[1])				
 							del(prod[i])
 						else:
 							preco += float(prod[i][1])*int(x[1]) #Add ao valor total
 							prod[i][2] = str(w)
+							fiscal.append(x[1])
+				nota.append(fiscal[:]) #add o produto a nota fiscal que será gerada
 			else:
 				print(f'Não temos "{x[0]}" no estoque')
-			
-			x = open('tabela.txt', 'w') #apagar o arquivo
-			x.close()
 
-			x = open('tabela.txt', 'a') #escreve os produtos de novo sem o excluido
-			for i in range(len(prod)):
-				for j in range(3):
-					if j == 2:
-						x.write(prod[i][j])
-						x.write('\n')
-					else:
-						x.write(prod[i][j])
-						x.write(' ')
-			x.close()
-
+			atualizaTabela(prod)
 			resp = input('Deseja continuar comprando?(S/N) ').upper()
 			if resp[0] == 'S':
 				comp = True
 			else:
 				comp = False
-	print(f'\nO valor total da compra é R${preco:.2f}')
+	notaFiscal(nota, preco)
 
 #def ganhos():
 
