@@ -1,6 +1,6 @@
 # Trabalho Final do Curso Intensivo de Python
 
-Read this file in [english]()
+Read this file in [english](https://github.com/filhaDeHades/Trabalho-Final-Curso-Intensivo/blob/master/README.md)
 
 ## Objetivo:
 Esse trabalho tem como objetivo colocar em prática o que foi aprendido durante o curso intensivo de python.

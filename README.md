@@ -1,6 +1,6 @@
 # Python Intensive Course Final Work
 
-Leia esse arquivo em [português]()
+Leia esse arquivo em [português](https://github.com/filhaDeHades/Trabalho-Final-Curso-Intensivo/blob/master/README_pt-BR.md)
 
 ## Purpose:
 The purpose of this work is practice the things learned in th Python intensive course "Fluência em Python - Do básico ao avançado".
