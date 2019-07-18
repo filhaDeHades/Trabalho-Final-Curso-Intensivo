@@ -97,8 +97,6 @@ def compra():
 					break
 				elif x[0] == prod[i][0].upper():
 					break
-			print(f'i = {i}')
-			print(f'len = {len(prod)}')
 			if i != len(prod): #Encontrou o produto na lista
 				for i in prod:
 					if x[0] == i[0].upper():
