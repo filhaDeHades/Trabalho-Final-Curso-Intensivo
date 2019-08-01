@@ -135,7 +135,7 @@ def ganhosDia():
 
 def addi():
 	x = open('tabela.txt', 'r') #Abrir para escrever no final
-	print('\033[033m\nDigite o produto que você quer adicionar, seu preço com 2 casas decimais e sua quantidade em estoque:')
+	print('\033[033m\nDigite \033[m\033[032mo produto\033[m\033[033m que você quer adicionar, \033[032mseu preço\033[m\033[033m com 2 casas decimais e \033[032msua quantidade\033[m\033[033m em estoque:')
 	print("Caso o nome do produto tenha mais de uma palavra, substitua os espaços por '-'\n")
 	novo = input('Digite o produto: \033[m')
 	novo = novo + "\n"
@@ -191,7 +191,7 @@ def main():
 				else:
 					exit(1)
 			else:
-				print('A opção digitada não é válida.')
+				print('\033[031mA opção digitada não é válida.\033[m')
 				continue
 		else: #caso o usuário escreva
 			if n[0] in 'Tt':
