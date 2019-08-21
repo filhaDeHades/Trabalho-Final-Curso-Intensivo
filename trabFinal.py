@@ -60,6 +60,10 @@ def notaFiscal(matriz):
 def atualizaTabela(matriz):
 	x = open('tabela.txt', 'w')
 
+	#Ordenar a lista, mesmo que ela não esteja ordenada no início
+	#Pode causar problemas com palavras que utilizam acentos
+	matriz.sort()
+
 	for i in range(len(matriz)):
 		for j in range(3):
 			x.write(matriz[i][j])
