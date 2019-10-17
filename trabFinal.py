@@ -116,7 +116,6 @@ def compra():
 								fiscal.append(x[1])
 							for j in range(len(prod)):
 								if prod[j][0] == i[0]:
-									print('entrou')
 									del(prod[j])
 									break
 						else:

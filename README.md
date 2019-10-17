@@ -4,6 +4,7 @@ Leia esse arquivo em [português](https://github.com/filhaDeHades/Trabalho-Final
 
 ## Purpose:
 The purpose of this work is practice the lessons learned in th Python's intensive course "Fluência em Python - Do básico ao avançado".
+
 ## Specification:
 Create a "system" for a store of any kind (marketplace, video shop, book store), using files.
 The initial file will be a list containing the produts, its prieces and quantity stored. The products are separated in lines.
